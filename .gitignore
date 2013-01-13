@@ -1,7 +1,7 @@
 web/bundles/
 web/uploads/
 app/bootstrap.php.cache
-app/config/parameters.ini
+app/config/parameters.yml
 app/cache/*
 app/logs/*
 build/*
