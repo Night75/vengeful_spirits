@@ -1,0 +1,152 @@
+{% extends 
+	['SonataAdminBundle:Form:form_admin_fields.html.twig',
+ 	 "VSVitrineBundle:Form:fields_common.html.twig" ]
+ %}
+
+{#-- =================== Fonctionnalites implementees -->	
+	<!-- Nom de la propriete ajoutee dans la classe de sa div -->
+#}
+{% block field_row %}
+    {% if sonata_admin is not defined or not sonata_admin_enabled or not sonata_admin.field_description %}
+		{{ form_label(form, label|default(null)) }}
+        {{ form_errors(form) }}
+        {{ form_widget(form) }} 
+    {% else %}
+        <div class="control-group{% if errors|length > 0%} error{%endif%} {{sonata_admin.field_description.name}}" id="sonata-ba-field-container-{{id }}">
+            {% block label %}
+                {% if sonata_admin.field_description.options.name is defined %}
+                    {{ form_label(form, sonata_admin.field_description.options.name, { 'attr' : {'class' : 'control-label'} }) }}
+                {% else %}
+                    {{ form_label(form, label|default(null), { 'attr' : {'class' : 'control-label'} }) }}
+                {% endif %}
+            {% endblock %}
+
+            <div class="controls sonata-ba-field sonata-ba-field-{{ sonata_admin.edit }}-{{ sonata_admin.inline }} {% if errors|length > 0 %}sonata-ba-field-error{% endif %}">
+
+                {{ form_widget(form) }}
+
+                {% if errors|length > 0 %}
+                    <div class="help-inline sonata-ba-field-error-messages">
+                        {{ form_errors(form) }}
+                    </div>
+                {% endif %}
+
+                {% if sonata_admin.field_description.help %}
+                    <span class="help-block sonata-ba-field-help">{{ sonata_admin.field_description.help|raw }}</span>
+                {% endif %}
+            </div>
+        </div>
+    {% endif %}
+{% endblock field_row %}
+
+{#-- =================== Fonctionnalites implementees -->	
+	<!-- clean_labels -->
+#}		
+{% block collection_widget_row %}
+{% spaceless %}
+    <div class="sonata-collection-row">
+        {% if allow_delete %}
+            <a href="#" class="btn sonata-collection-delete"><i class="icon-remove"></i></a>
+        {% endif %}
+		{% if clean_labels %}
+			{{ form_row(child, {"clean_labels" : true }) }}
+		{% else %}
+			{{ form_row(child) }}
+		{% endif %}		
+    </div>
+{% endspaceless %}
+{% endblock %}
+
+{#-- =================== Fonctionnalites implementees -->	
+	<!-- clean_labels -->
+#}			
+{% block collection_widget %}
+{% spaceless %}
+    {% if prototype is defined %}
+        {% set child = prototype %}
+        {% set attr = attr|merge({'data-prototype': block('collection_widget_row') }) %}
+    {% endif %}
+    <div {{ block('widget_container_attributes') }}>
+		{{ form_errors(form) }}
+		{% for child in form %}
+			{{ block('collection_widget_row') }}
+		{% endfor %}
+        {{ form_rest(form) }}
+        {% if allow_add %}
+            <div><a href="#" class="btn sonata-collection-add"><i class="icon-plus"></i></a></div>
+        {% endif %}
+    </div>
+{% endspaceless %}
+{% endblock collection_widget %}
+
+{#-- =================== Fonctionnalites implementees -->	
+	<!-- clean_labels -->
+#}	
+{% block form_widget_compound %}
+{% spaceless %}
+    <div {{ block('widget_container_attributes') }} >
+        {% if form.parent is empty %}
+            {{ form_errors(form) }}
+        {% endif %}	
+		{% if clean_labels is defined and clean_labels == true %}
+			{{ block('form_rows', {'clean_labels' : true }) }}
+		{% else %}
+			{{ block('form_rows') }}
+		{% endif %}  
+		{{ form_rest(form) }}
+    </div>
+{% endspaceless %}
+{% endblock form_widget_compound %}		
+
+{#-- =================== Fonctionnalites implementees -->	
+	<!-- clean_labels -->
+#}			
+{% block form_rows %}
+{% spaceless %}
+	{% for child in form %}
+		{% if clean_labels is defined and clean_labels == true %}
+		<div class="{{child.name}}">{{ form_widget(child) }}</div>
+		{% else %}
+			{{ form_row(child) }}
+		{% endif %}
+	{% endfor %}
+{% endspaceless %}
+{% endblock form_rows %}		
+
+{#-- =================== Fonctionnalites implementees -->	
+	<!-- filename -->
+#}		
+{% block form_widget_simple %}
+{% spaceless %}
+    {% set type = type|default('text') %}
+	{% if filename is defined and filename is not null %}
+		<p class="filename">{{filename}}</p>	
+	{% endif %}
+		<input type="{{ type }}" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
+{% endspaceless %}
+{% endblock form_widget_simple %}
+		
+{% block delete_box_row %}
+	{% spaceless %}
+		<div class="form-delete-box">
+			{{form_widget(form)}}
+			{{form_label(form)}}
+		</div>
+	{% endspaceless %}
+{% endblock %}
+		
+		
+{#-- =================== Fonctionnalites implementees -->	
+	<!-- filename -->
+#}				
+{% block form_row %}
+{% spaceless %}
+    <div>
+		{% if no_label is defined and no_label == false %}
+			{{ form_label(form) }}
+		{% endif %}
+        {{ form_errors(form) }}
+        {{ form_widget(form) }}
+    </div>
+{% endspaceless %}
+{% endblock form_row %}		

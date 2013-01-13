@@ -1,0 +1,28 @@
+VS\VitrineBundle\Entity\Survey:
+  type: entity
+  repositoryClass: VS\VitrineBundle\Repository\SurveyRepository
+  table: survey
+  id:
+    id:
+      type: integer
+      generator: { strategy: AUTO }
+  fields:
+    question:
+      type: string
+      length: 255
+    created_at:
+      type: datetime
+    updated_at:
+      type: datetime
+  oneToMany:
+    survey_answers:
+      targetEntity: SurveyAnswer
+      mappedBy: survey
+      cascade: ["all"]
+  manyToOne:
+    author:
+      targetEntity: \VS\UserBundle\Entity\User
+      joinColumn: 
+        name: user_id
+        referencedColumnName: id      
+      

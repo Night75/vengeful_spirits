@@ -1,0 +1,34 @@
+VS\VitrineBundle\Entity\CarouselSlot:
+  type: entity
+  repositoryClass: VS\VitrineBundle\Repository\CarouselSlotRepository
+  table: carousel_slot
+  id: 
+    id:
+      type: integer
+      generator: { strategy: AUTO }
+  fields:
+    url:
+      type: string
+      length: 255
+    title:
+      type: string
+      length: 255
+    content:
+      type: string
+      length: 255
+    image:
+      type: string
+      length: 255
+    activated:
+      type: boolean
+    created_at:
+      type: datetime
+    updated_at:
+      type: datetime
+  manyToOne:
+    author:
+      targetEntity: \VS\UserBundle\Entity\User
+      joinColumn: 
+        name: user_id
+        referencedColumnName: id
+    

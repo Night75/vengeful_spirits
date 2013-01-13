@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+	<head>	
+		<script src="http://code.jquery.com/jquery-latest.js"></script>
+		<script type="text/javascript" src="/vengeful-spirits/web/bundles/vsvitrine/js/nForm.js"></script>		
+	</head>
+	<body>
+		<form action="{{path('vs_vitrine_process_ajax')}}" method="post" data-loading-gif="{{asset("bundles/vsvitrine/images/")}}ajax-loader.gif" >
+			select <select name="nform[checkbox]"><option value="one">one</option><option value="two">two</option></select> <br/>
+			check<input name="nform[checkbox]" type="checkbox"/> <br/>
+			text<input name="nform[text]" type="text"/><br/>
+			textarea<input name="nform[texarea]" type="textarea"/> <br/>
+			<input type="submit" value="envoyer"/><br/>
+		</form>
+
+		<script>
+			
+			$("form").nForm();
+		</script>
+	</body>
+</html>

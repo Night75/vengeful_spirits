@@ -1,0 +1,44 @@
+.line-through {
+  text-decoration: line-through;
+}
+.updated_at {
+  display: none;
+}
+.widget-for-delete .filename {
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 20px;
+  padding-top: 5px;
+  margin-bottom: 5px;
+}
+.widget-for-delete .label-delete {
+  font-size: 14px;
+  padding: 0 0 0 5px;
+}
+.widget-for-delete input[type="checkbox"] {
+  vertical-align: middle;
+  position: relative;
+  margin: 0;
+  top: -1px;
+}
+.form-delete-box {
+  margin-left: 160px;
+}
+.form-delete-box label {
+  display: inline !important;
+  float: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+.form-delete-box input {
+  display: inline !important;
+  margin: 0 !important;
+  padding-right: 5px !important;
+  vertical-align: center !important;
+}
+.file-loaded {
+  margin: 0 !important;
+}
+.file-loaded p {
+  margin: 5px 0 !important;
+}

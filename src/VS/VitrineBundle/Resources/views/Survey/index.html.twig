@@ -1,0 +1,36 @@
+{% extends "::base.html.twig" %}
+
+{% block stylesheets %}
+	{{parent()}}
+	<style>
+		#survey #survey-result{
+			width:300px;
+		}
+	</style>
+{% endblock %}
+	
+{% block body %}
+<section id="survey">	
+	<h2>Sondages</h2>
+	
+	{% for survey in surveys %}
+	
+		<div id="survey-result">
+			<div class="survey-question">
+				<p class="title-small-static">Sondage cree le {{survey.createdAt | date("d/m/Y")}}: <br>
+					{{survey.question}}
+				</p>    
+			</div>
+			<ul>
+				{% for answer in survey.surveyAnswers %}
+					<li>
+						{{answer}} <br>
+						<span class="img-answer"></span>
+						<span class="num-votes">{{answer.totalVotes}}</span>
+					</li>
+				{% endfor %}
+			</ul>
+		</div>
+	{% endfor %}
+</section>
+{% endblock %}

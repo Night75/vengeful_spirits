@@ -1,0 +1,17 @@
+VS\VitrineBundle\Entity\Storage:
+  type: entity
+  repositoryClass: VS\VitrineBundle\Repository\StorageRepository
+  table: storage
+  id: 
+    id:
+      type: integer
+      generator: { strategy: AUTO }
+  fields:
+    title:
+      type: string
+      length: 255
+  oneToMany:
+    doc_files:
+      targetEntity: DocFile
+      mappedBy: storage
+      cascade: ["persist", "remove"]

@@ -1,0 +1,21 @@
+<div id="survey-vote">
+	<div class="survey-question">    
+		<h3 class="title-small">{{survey.question}}</h3>
+	</div>
+	
+	<form action="" method="post" class="form_event">
+		<div class="survey-answers">
+			{% for answer in form.survey_vote %}
+				<div class="row">
+					<div><div class="hr-line-left"></div></div>
+					{{form_widget(answer)}}
+					{{form_label(answer)}}
+				</div>
+			{% endfor %}
+			{{ form_rest(form) }}
+			<div class="bt-wrapper-survey-validation">
+				<input type="submit" class="bt-gold" value="Vote" />
+			</div>
+		</div>
+	</form>	
+</div>

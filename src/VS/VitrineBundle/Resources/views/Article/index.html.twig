@@ -1,0 +1,52 @@
+{% extends "::base.html.twig" %}
+
+
+{% block body %}	
+
+<!-- *************** ------------------- _____________________ LISTE DES NEWS _____________________ ------------------ ***************-->		
+	<section id="articles-summary">
+		<h2>Dernières News</h2>
+		
+		<div class="navigation">
+			{{ pagination.render()|raw }}
+		</div>
+		
+		{% for article in pagination %}
+			<div class="article gn-panel-wrapper">
+				<div class="bdr-top-left"></div>
+				<div class="bdr-bot-right"></div>
+
+				<div class="gn-panel-container">
+					<div class="article-img">
+						<a href="{{path('article_show',{'id':article.id}) }}"><img src="{{path_img_articles}}{{article.image | default("default.jpg")}}"/></a>
+					</div>
+					<div class="article-txt">
+						<div class="article-txt-wrapper">
+							<div class="article-title">
+								<h3><a href="{{path('article_show',{'id':article.id}) }}">{{article.title}}</a></h3>
+								<p>
+									<span class="txt-annotation">Le {{article.createdAt | date("d/m/Y") }}, par</span>
+									<a href="{{path('article_show',{'id':article.id})}}" class="txt-legend"> Quelqu'un</a>
+								</p>
+							</div>
+							<div class="article-content">
+								<p>
+									{{article.content | length > 400 ? article.content | slice(0, 400) ~ "..." : article.content }}
+								</p>
+							</div>
+						</div>
+					</div><!-- ========== Fin de .article-txt -->	
+				</div><!-- ========== Fin de .panel-container -->	
+			</div><!-- ========== Fin de .panel-wrapper -->	
+		{% endfor %}
+			
+	</section> <!-- ========== Fin de #articles-summary -->
+		
+	<section id="annex">
+
+	</section>
+
+	<section id="pagination">
+
+	</section>
+{% endblock %}

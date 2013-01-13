@@ -1,0 +1,11 @@
+vs_user_admin_login:
+    pattern:  /login
+    defaults: { _controller: VSUserBundle:Security:login }
+
+vs_user_admin_login_check:
+    pattern:  /login_check
+    defaults: { _controller: VSUserBundle:Security:login }
+  
+vs_user_admin_logout:
+    pattern:  /logout
+    defaults: { _controller: VSUserBundle:Security:login }    

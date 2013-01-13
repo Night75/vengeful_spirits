@@ -1,0 +1,146 @@
+{% set path_public = asset("bundles/vsvitrine/") %}
+{% set path_img =  asset("bundles/vsvitrine/images/") %}
+{% set path_img_articles =  asset("uploads/articles/") %}
+{% set path_img_carousel =  asset("uploads/carousel/") %}
+{% set path_img_user =  asset("uploads/users/") %}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>{% block title %}Vengeful Spirits{% endblock %}</title>
+	
+	{% stylesheets '@VSVitrineBundle/Resources/public/css/vengeful_spirits.css' %}
+		 <link rel="stylesheet" href="{{ asset_url }}" />
+	{% endstylesheets %}
+	{% block style %}
+	{% endblock %}
+		 
+		<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+	{% javascripts '@VSVitrineBundle/Resources/public/js/*' %}
+		<script type="text/javascript" src="{{ asset_url }}"></script>
+	{% endjavascripts %}
+	
+	{% block stylesheets %}{% endblock %}
+	{% block script %}
+		<script >	
+			//*************** --------------  ___________  DECTECTION DE LA COMPATIBILITE DU NAVIGATEUR ___________--------------*************** 
+			$(function(){
+				if(!Modernizr.cssgradients || !Modernizr.textshadow || !Modernizr.boxshadow){
+					alert("Votre navigateur ne semble pas être en mesure d'afficher le rendu complet du site. Si vous souhaitez afficher le contenu de manière optimale, veuillez utiliser une version récente de firefox, chrome ou safari.")
+					//alert("Ce site utilise des technologies web récentes. Veuillez mettre à jour votre navigateur, ou télécharger un navigateur plus recent.\nMerci pour votre compréhension.");
+					//window.location.href = "http://www.mozilla.org/fr/firefox/new/";
+				}	
+			})	
+		</script>
+	{% endblock%}
+</head>
+
+<body>
+	<div id="container-full">
+		
+		<!-- __________________ ----------------- ************ HEADER ************----------------- __________________ -->
+		<header>
+			<div id="ldc-logo"><img src="{{path_img}}logo.png" alt=""/></div>
+			<div id="ldc-title">
+				<h1 title="Vengeful Spirits evanescence">
+					<img src="{{path_img}}vengeful_spirits_evanescence.png" alt="Vengeful Spirits evanescence"/>
+				</h1>  
+			</div>	
+			<div class="border_header"></div>
+		</header>
+		
+		<div id="container-main">
+			<!-- __________________ ----------------- ************ MENU ************----------------- __________________ -->
+			<nav>
+				<ul>
+					<li class="bt-menu-light">
+						<a href="{{path('vs_vitrine_homepage')}}">Accueil</a>
+					</li><!--
+				--><li class="bt-menu-light">
+						<a href="{{path('article',{'page':1})}}">News</a>
+					</li><!--
+				--><li class="bt-menu-light">
+						<a href="">Communaute</a>
+						<ul>
+							<li><a href="{{path('event_index')}}">Evenements</a></li>
+							<li><a href="{{path('survey_index')}}">Sondages</a></li>
+						</ul>
+					</li><!--
+				--><li class="bt-menu-light">
+						<a class="unavailable"  href="">Guides</a>
+					</li><!--
+				--><li class="bt-menu-light">	
+						<a class="unavailable" href="">Forum</a>
+					</li>
+						{% if is_granted('ROLE_ADMIN') %}
+						<li class="bt-gold">
+							<a href="{{path('sonata_admin_dashboard')}}">Espace admin</a>
+						</li>
+						{% endif %}
+				</ul>
+			</nav>
+			
+			<!-- __________________ ----------------- ************ SUB HEADER ************----------------- __________________ -->
+			 <section id="panel-head" class="gn-panel-wrapper">		
+				{% block container_header %}
+					{{formLogin | raw }}
+				{% endblock %} 
+			</section>
+			
+			<!-- __________________ ----------------- ************ CONTENU ************----------------- __________________ -->
+			<div id="container-content">
+				{% block body %}
+				{% endblock %}
+			</div> <!-- ========== Fin de #container-content -->
+			
+		</div> <!-- ========== Fin de #container-main -->		
+		
+		<!-- __________________ ----------------- ************ FOOTER ************----------------- __________________ -->
+		{% block footer %}
+		<footer>
+			<div class="border-footer"></div>
+			<div id="footer-content">
+				<div id="footer-left-part">
+					<h4>Navigation</h4>
+					<ul>
+						<li><a href="{{path('vs_vitrine_homepage')}}">Accueil</a></li><!--
+					 --><li><a href="{{path('vs_vitrine_homepage')}}">News</a></li><!--
+					 --><li><a>Communaute</a></li><!--
+					 --><li><a>Classes</a></li>
+						<li><a>Forum</a></li>
+					</ul>
+				</div>
+				<div id="footer-mid-part">
+					<div class="hr-line-top"></div>
+					<div class="footer-mid-content">
+						<h4>Suivez nous</h4>
+						<ul>
+							<li><span class="icon-footer icon-twitter"></span><a>Twitter</a></li>
+							<li><span class="icon-footer icon-facebook"></span><a>Facebook</a></li>
+							<li><span class="icon-footer icon-youtube"></span><a>Youtube</a></li>
+						</ul>
+					</div>
+					<div class="hr-line-top"></div>
+				</div>
+				<div id="footer-right-part">
+					<h4>A propos</h4>
+					<ul>
+						<p>De nombreuses suites <a class="txt-legend">logicielles</a> de mise en page ou éditeurs de sites Web
+							ont fait du Lorem Ipsum leur faux texte par <a class="txt-legend">défaut</a>, et une recherche pour
+							<a class="txt-legend">'Lorem Ipsum'</a> vous conduira vers de nombreux sites qui n'en sont encore qu'à 
+							leur phase de construction. Plusieurs <a class="txt-legend">versions</a> sont apparues avec le temps.</p>
+					</ul>
+				</div>
+			</div>	
+			<div id="copyright"><p>Copyright © 2009-2011 Vengeful Spirits Evanescence. All Rights Reserved.</p></div>
+		</footer>
+		{% endblock footer %}
+</body>
+
+{% block javascripts %}
+{# Ajoutez ce javascript si vous comptez vous servir des fonctionnalités du bootstrap Twitter #}
+<script type="text/javascript" src="{{ asset('js/bootstrap.js') }}"></script>
+{% endblock %}
+
+</html>

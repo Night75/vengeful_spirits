@@ -1,0 +1,173 @@
+<?php
+
+namespace VS\VitrineBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Survey
+ */
+class Survey {
+
+	/**
+	 * @var integer
+	 */
+	private $id;
+
+	/**
+	 * @var string
+	 */
+	private $question;
+
+	/**
+	 * @var \Doctrine\Common\Collections\Collection
+	 */
+	private $survey_answers;
+
+	/**
+	 * @var integer
+	 */
+	private $total_votes;
+
+	/**
+	 * @var \DateTime
+	 */
+	private $created_at;
+
+	/**
+	 * @var \DateTime
+	 */
+	private $updated_at;
+
+	/**
+	 * Constructor
+	 */
+	public function __construct() {
+		$this->survey_answers = new \Doctrine\Common\Collections\ArrayCollection();
+		$this->total_votes = 0;
+	}
+
+	/**
+	 * Get id
+	 *
+	 * @return integer 
+	 */
+	public function getId() {
+		return $this->id;
+	}
+
+	/**
+	 * Set question
+	 *
+	 * @param string $question
+	 * @return Survey
+	 */
+	public function setQuestion($question) {
+		$this->question = $question;
+
+		return $this;
+	}
+
+	/**
+	 * Get question
+	 *
+	 * @return string 
+	 */
+	public function getQuestion() {
+		return $this->question;
+	}
+
+	/**
+	 * Set created_at
+	 *
+	 * @param \DateTime $createdAt
+	 * @return Survey
+	 */
+	public function setCreatedAt($createdAt) {
+		$this->created_at = $createdAt;
+
+		return $this;
+	}
+
+	/**
+	 * Get created_at
+	 *
+	 * @return \DateTime 
+	 */
+	public function getCreatedAt() {
+		return $this->created_at;
+	}
+
+	/**
+	 * Set updated_at
+	 *
+	 * @param \DateTime $updatedAt
+	 * @return Survey
+	 */
+	public function setUpdatedAt($updatedAt) {
+		$this->updated_at = $updatedAt;
+
+		return $this;
+	}
+
+	/**
+	 * Get updated_at
+	 *
+	 * @return \DateTime 
+	 */
+	public function getUpdatedAt() {
+		return $this->updated_at;
+	}
+
+	/**
+	 * Set total_votes
+	 *
+	 * @param integer $totalVotes
+	 * @return Survey
+	 */
+	public function setTotalVotes($totalVotes) {
+		$this->total_votes = $totalVotes;
+
+		return $this;
+	}
+
+	/**
+	 * Get total_votes
+	 *
+	 * @return integer 
+	 */
+	public function getTotalVotes() {
+		return $this->total_votes;
+	}
+
+	/**
+	 * Add survey_answers
+	 *
+	 * @param \VS\VitrineBundle\Entity\SurveryAnswer $surveyAnswers
+	 * @return Survey
+	 */
+	public function addSurveyAnswer(\VS\VitrineBundle\Entity\SurveyAnswer $surveyAnswers) {
+		$this->survey_answers[] = $surveyAnswers;
+		$surveyAnswers->setSurvey($this);
+		return $this;
+	}
+
+	/**
+	 * Remove survey_answers
+	 *
+	 * @param \VS\VitrineBundle\Entity\SurveryAnswer $surveyAnswers
+	 */
+	public function removeSurveyAnswer(\VS\VitrineBundle\Entity\SurveyAnswer $surveyAnswers) {
+		$this->survey_answers->removeElement($surveyAnswers);
+	}
+
+	/**
+	 * Get survey_answers
+	 *
+	 * @return \Doctrine\Common\Collections\Collection 
+	 */
+	public function getSurveyAnswers() {
+		return $this->survey_answers;
+	}
+
+}

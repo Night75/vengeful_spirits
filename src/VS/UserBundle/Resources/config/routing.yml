@@ -1,0 +1,7 @@
+vs_vitrine_user_show:
+    pattern:  /show
+    defaults: { _controller: VSUserBundle:Profile:mainShow }    
+    
+vs_user_edit:
+    pattern:  /edit
+    defaults: { _controller: VSUserBundle:Profile:mainEdit }        

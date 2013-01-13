@@ -1,0 +1,16 @@
+<form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST"
+			id ="user-register-form" class="fos_user_registration_register">
+	
+		<h2>Inscription</h2>
+		<!-- ========== Erreurs Generales-->	
+		
+		{{form_widget(form)}}	
+		
+		<p> * Champs obligatoires</p>
+		<!-- ========== Bouton Validation -->	
+		{{ form_rest(form) }}
+		<div>
+			<input type="submit" class="bt-gold" />
+		</div>
+		
+</form>

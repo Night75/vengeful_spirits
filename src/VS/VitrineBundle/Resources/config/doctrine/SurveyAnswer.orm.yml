@@ -1,0 +1,26 @@
+VS\VitrineBundle\Entity\SurveyAnswer:
+  type: entity
+  repositoryClass: VS\VitrineBundle\Repository\SurveyAnswerRepository
+  table: survey_answer
+  id:
+    id:
+      type: integer
+      generator: { strategy: AUTO }
+  fields:
+    content:
+      type: string
+      length: 255
+    total_votes:
+      type: integer
+    created_at:
+      type: datetime
+    updated_at:
+      type: datetime
+  manyToOne:
+    survey:
+      targetEntity: Survey
+      inversedBy: survey_answers
+      joinColumn:
+        name: survey_id
+        referencedColumnName: id
+        

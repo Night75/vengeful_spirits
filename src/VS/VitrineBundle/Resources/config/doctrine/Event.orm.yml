@@ -1,0 +1,27 @@
+VS\VitrineBundle\Entity\Event:
+  type: entity
+  repositoryClass: VS\VitrineBundle\Repository\EventRepository
+  table: event
+  id:
+    id:
+      type: integer
+      generator: { strategy: AUTO }
+  fields:
+    title:
+      type: string
+      length: 255
+    description:
+      type: string
+      length: 255
+    event_date:
+      type: datetime
+    created_at:
+      type: datetime
+    updated_at:
+      type: datetime
+  manyToOne:
+    author:
+      targetEntity: \VS\UserBundle\Entity\User
+      joinColumn: 
+        name: user_id
+        referencedColumnName: id

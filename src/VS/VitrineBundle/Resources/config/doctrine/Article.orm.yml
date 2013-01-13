@@ -1,0 +1,28 @@
+VS\VitrineBundle\Entity\Article:
+  type: entity
+  repositoryClass: VS\VitrineBundle\Repository\ArticleRepository
+  table: article
+  id:
+    id:
+      type: integer
+      generator: { strategy: AUTO }
+  fields:
+    title: 
+      type: string
+      length: 255
+    content: 
+      type: text
+    image:
+      type: string
+      length: 255
+      nullable: true
+    created_at:
+      type: datetime
+    updated_at:
+      type: datetime
+  manyToOne:
+    author:
+      targetEntity: \VS\UserBundle\Entity\User
+      joinColumn:
+        name: user_id
+        referencedColumnName: id

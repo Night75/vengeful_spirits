@@ -1,0 +1,27 @@
+vs_vitrine_homepage:
+    pattern:  /
+    defaults: { _controller: VSVitrineBundle:Vitrine:index }
+
+vs_vitrine_article:
+    resource: "@VSVitrineBundle/Resources/config/routing/article.yml"
+    prefix:  /article
+
+vs_vitrine_survey:
+    resource: "@VSVitrineBundle/Resources/config/routing/survey.yml"
+    prefix:  /sondage
+ 
+vs_vitrine_event:
+    resource: "@VSVitrineBundle/Resources/config/routing/event.yml"
+    prefix:  /event
+    
+vs_vitrine_docfile:
+    pattern:  /docfile
+    defaults: { _controller: VSVitrineBundle:DocFile:index }
+    
+vs_vitrine_sendform:
+    pattern:  /sendform
+    defaults: { _controller: VSVitrineBundle:Vitrine:sendForm }    
+    
+vs_vitrine_process_ajax:
+    pattern:  /sendform/process
+    defaults: { _controller: VSVitrineBundle:Vitrine:processAjax }        

@@ -1,0 +1,18 @@
+services:
+    vs_user.registration.form.type:
+        class: VS\UserBundle\Form\Type\RegistrationFormType
+        arguments: [%fos_user.model.user.class%]
+        tags:
+            - { name: form.type, alias: vs_user_registration }
+            
+    vs_user.profile.form.type:
+        class: VS\UserBundle\Form\Type\ProfileFormType
+        arguments: [%fos_user.model.user.class%]
+        tags:
+            - { name: form.type, alias: vs_user_profile }
+            
+    vs_user.change_password.form.type:
+        class: VS\UserBundle\Form\Type\ChangePasswordFormType
+        arguments: [%fos_user.model.user.class%]
+        tags:
+            - { name: form.type, alias: vs_user_change_password }

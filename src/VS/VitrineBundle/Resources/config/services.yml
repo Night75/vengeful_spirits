@@ -1,0 +1,128 @@
+parameters:
+     max_articles_on_index: 2
+     max_surveys_on_survey_list: 5
+     max_events_on_event_list: 30
+     vs.vitrine.article.class: VS\VitrineBundle\Entity\Article
+     vs.vitrine.carousel_slot.class: VS\VitrineBundle\Entity\CarouselSlot
+     vs.vitrine.storage.class: VS\VitrineBundle\Entity\Storage  
+     vs.vitrine.doc_file.class: VS\VitrineBundle\Entity\DocFile   
+     article_upload_path: web/uploads/articles
+    
+services:
+
+### -------------------- MANAGERS -------------------- ###
+    vs.vitrine.article_manager:
+      class: VS\VitrineBundle\Entity\ArticleManager      
+      arguments: [@doctrine.orm.default_entity_manager, @service_container, %article_upload_path%  ]
+   
+    vs.vitrine.carousel_slot_manager:
+      class: VS\VitrineBundle\Entity\CarouselSlotManager      
+      arguments: [@doctrine.orm.default_entity_manager, @service_container]
+   
+    vs.vitrine.event_manager:
+      class: VS\VitrineBundle\Entity\EventManager      
+      arguments: [@doctrine.orm.default_entity_manager, @service_container]
+    
+    vs.vitrine.survey_manager:
+      class: VS\VitrineBundle\Entity\SurveyManager      
+      arguments: [@doctrine.orm.default_entity_manager, @service_container ]
+ 
+    vs.vitrine.survey_answer_manager:
+      class: VS\VitrineBundle\Entity\SurveyAnswerManager      
+      arguments: [@doctrine.orm.default_entity_manager, @service_container ]
+              
+    vs.vitrine.storage_manager:
+      class: VS\VitrineBundle\Entity\StorageManager      
+      arguments: [@doctrine.orm.default_entity_manager, @service_container ]
+
+    vs.vitrine.doc_file_manager:
+      class: VS\VitrineBundle\Entity\DocFileManager      
+      arguments: [@doctrine.orm.default_entity_manager, @service_container ]
+     
+   ### -------------------- ADMIN -------------------- ###
+
+    vs.vitrine.admin.article:
+      class: VS\VitrineBundle\Admin\ArticleAdmin
+      calls: 
+        - [ setContainer, [@service_container] ]
+      tags: 
+        - { name: sonata.admin, manager_type: orm, group: vs, label: Articles }
+      arguments: [ null, VS\VitrineBundle\Entity\Article, null ]
+
+    vs.vitrine.admin.storage:
+      class: VS\VitrineBundle\Admin\StorageAdmin
+      calls: 
+        - [ setContainer, [@service_container] ]
+      tags: 
+        - { name: sonata.admin, manager_type: orm, group: vs, label: Storages }
+      arguments: [ null, VS\VitrineBundle\Entity\Storage, null ]
+
+    vs.vitrine.admin.doc_file:
+      class: VS\VitrineBundle\Admin\DocFileAdmin
+      tags: 
+        - { name: sonata.admin, manager_type: orm, group: vs, label: DocFile }
+      arguments: [ null, VS\VitrineBundle\Entity\DocFile, null ]
+  
+    vs.vitrine.admin.event:
+      class: VS\VitrineBundle\Admin\EventAdmin
+      calls: 
+        - [ setContainer, [@service_container] ] 
+      tags: 
+        - { name: sonata.admin, manager_type: orm, group: vs, label: Event }
+      arguments: [ null, VS\VitrineBundle\Entity\Event, null ]
+
+    vs.vitrine.admin.survey:
+      class: VS\VitrineBundle\Admin\SurveyAdmin
+      calls: 
+        - [ setContainer, [@service_container] ] 
+      tags: 
+        - { name: sonata.admin, manager_type: orm, group: vs, label: Survey }
+      arguments: [ null, VS\VitrineBundle\Entity\Survey, null ]
+
+    vs.vitrine.admin.user:
+      class: VS\UserBundle\Admin\UserAdmin
+      calls: 
+        - [ setContainer, [@service_container] ]
+      tags: 
+        - { name: sonata.admin, manager_type: orm, group: vs, label: Users }
+      arguments: [ null, VS\UserBundle\Entity\User, null ]
+      
+   ### -------------------- FORMS TYPES -------------------- ###
+
+    vs.vitrine.checkbox_type_extension:
+        class: VS\VitrineBundle\Form\Extension\CheckboxTypeExtension
+        tags:
+            - { name: form.type_extension, alias: checkbox }
+            
+    vs.vitrine.collection_type_extension:
+        class: VS\VitrineBundle\Form\Extension\CollectionTypeExtension
+        tags:
+            - { name: form.type_extension, alias: collection }        
+    
+    vs.vitrine.survey_vote_type:
+        class: VS\VitrineBundle\Form\Type\SurveyVoteType
+        tags:
+            - { name: form.type, alias: survey_vote_type }        
+            
+    ### -------------------- FORMS HANDLERS -------------------- ###
+    
+    vs.vitrine.survey_vote_handler:
+        class: VS\VItrineBundle\Form\Handler\SurveyVoteHandler
+        arguments: [ @form.factory, @vs.vitrine.survey_vote_type, @service_container, @vs.vitrine.survey_manager ]
+        
+  
+    ### -------------------- EVENT LISTENERS -------------------- ###  
+    authentification_listener:
+        class: VS\UserBundle\EventListener\AuthentificationListener
+        
+           # - { name: kernel.event_listener, event: kernel.controller, method: onKernelView}
+
+#    vs_vitrine.doctrine_listener:
+#        class: VS\VitrineBundle\EventListener\VSDoctrineListener
+#        arguments: [@service_container ]
+#        tags:
+#          - { name: doctrine.event_listener, event: preUpdate, priority: 255 }
+#          - { name: doctrine.event_listener, event: prePersist}
+#          - { name: doctrine.event_listener, event: postPersist}
+#          - { name: doctrine.event_listener, event: postUpdate }
+#          - { name: doctrine.event_listener, event: onFlush }

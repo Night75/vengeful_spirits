@@ -1,0 +1,46 @@
+{% extends "::base.html.twig" %}
+{% set path_img = asset("bundles/vsvitrine/images/") %}
+
+{% block stylesheets %}
+<!-- *************** ------------------- _____________________ SCRIPTS ET STYLES _____________________ ------------------ ***************-->		
+	{{parent()}}
+	<style>
+		#calendar{
+			width:600px;
+		}
+		.calendar-info{
+			width:570px;
+		}
+	</style>
+{% endblock %}
+
+	
+{% block body %}	
+<!-- *************** ------------------- _____________________ LISTE DES EVENEMENTS _____________________ ------------------ ***************-->		
+<section id="calendar">	
+	<h2>Evenements</h2>
+	{% for events in eventsGroup %}
+		<div class="gn-panel-container">
+			<div class="calendar-month">    
+				<div class="title-small">
+					{% set month = "month." ~ events[0].eventDate | date("F") | lower %}
+					{{ month|trans({}) }}
+				</div>
+				<div><div class="hr-line-right"></div></div>
+			</div>
+			<ul>  
+			{% for event in events %}     
+				<li>
+					<div class="calendar-day"><span class="icon-day">{{event.eventDate | date("d")}}</span></div>
+					<div class="calendar-info">
+						<span >{{event.eventDate | date("G:i")}} : {{event.title}}.</span>
+						<span class="txt-legend-i">{{event.description}} </span>
+					</div>
+				</li>
+			{% endfor %}
+			</ul>
+		</div>
+	{% endfor %}
+</section>
+{% endblock %}
+

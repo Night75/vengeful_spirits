@@ -1,0 +1,129 @@
+{#-- =================== Fonctionnalites implementees -->	
+	<!-- checkbox delete -->
+#}
+{% block checkbox_widget %}
+{% spaceless %}
+	{% if for_delete is not null %}
+	<div class="widget-for-delete">
+		<p class="filename">{{for_delete}}</p>
+		<input type="checkbox" {{ block('widget_attributes') }}{% if value is defined %} value="{{ value }}"{% endif %}{% if checked %} checked="checked"{% endif %} />
+		<span class="label-delete"> Supprimer ce fichier</span>
+	</div>
+	{% else %}
+		<input type="checkbox" {{ block('widget_attributes') }}{% if value is defined %} value="{{ value }}"{% endif %}{% if checked %} checked="checked"{% endif %} />
+	{% endif %}
+{% endspaceless %}
+{% endblock checkbox_widget %}
+		
+
+{#-- =================== Fonctionnalites implementees -->	
+	<!-- clean_labels -->
+#}		
+{% block collection_widget_row %}
+{% spaceless %}
+    <div class="sonata-collection-row">
+        {% if allow_delete %}
+            <a href="#" class="btn sonata-collection-delete"><i class="icon-remove"></i></a>
+        {% endif %}
+		{% if clean_labels %}
+			{{ form_row(child, {"clean_labels" : true }) }}
+		{% else %}
+			{{ form_row(child) }}
+		{% endif %}		
+    </div>
+{% endspaceless %}
+{% endblock %}
+
+{#-- =================== Fonctionnalites implementees -->	
+	<!-- clean_labels -->
+#}			
+{% block collection_widget %}
+{% spaceless %}
+    {% if prototype is defined %}
+        {% set child = prototype %}
+        {% set attr = attr|merge({'data-prototype': block('collection_widget_row') }) %}
+    {% endif %}
+    <div {{ block('widget_container_attributes') }}>
+		{{ form_errors(form) }}
+		{% for child in form %}
+			{{ block('collection_widget_row') }}
+		{% endfor %}
+        {{ form_rest(form) }}
+        {% if allow_add %}
+            <div><a href="#" class="btn sonata-collection-add"><i class="icon-plus"></i></a></div>
+        {% endif %}
+    </div>
+{% endspaceless %}
+{% endblock collection_widget %}
+
+{#-- =================== Fonctionnalites implementees -->	
+	<!-- clean_labels -->
+#}	
+{% block form_widget_compound %}
+{% spaceless %}
+    <div {{ block('widget_container_attributes') }} >
+        {% if form.parent is empty %}
+            {{ form_errors(form) }}
+        {% endif %}	
+		{% if clean_labels is defined and clean_labels == true %}
+			{{ block('form_rows', {'clean_labels' : true }) }}
+		{% else %}
+			{{ block('form_rows') }}
+		{% endif %}  
+		{{ form_rest(form) }}
+    </div>
+{% endspaceless %}
+{% endblock form_widget_compound %}		
+
+{#-- =================== Fonctionnalites implementees -->	
+	<!-- clean_labels -->
+#}			
+{% block form_rows %}
+{% spaceless %}
+	{% for child in form %}
+		{% if clean_labels is defined and clean_labels == true %}
+		<div class="{{child.name}}">{{ form_widget(child) }}</div>
+		{% else %}
+			{{ form_row(child) }}
+		{% endif %}
+	{% endfor %}
+{% endspaceless %}
+{% endblock form_rows %}		
+
+{#-- =================== Fonctionnalites implementees -->	
+	<!-- filename -->
+#}		
+{% block form_widget_simple %}
+{% spaceless %}
+    {% set type = type|default('text') %}
+	{% if filename is defined and filename is not null %}
+		<p class="filename">{{filename}}</p>	
+	{% endif %}
+		<input type="{{ type }}" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
+{% endspaceless %}
+{% endblock form_widget_simple %}
+		
+		
+{% block delete_box_row %}
+	{% spaceless %}
+		<div class="form-delete-box">
+			{{form_widget(form)}}
+			{{form_label(form)}}
+		</div>
+	{% endspaceless %}
+{% endblock %}
+		
+{#-- =================== Fonctionnalites implementees -->	
+	<!-- filename -->
+#}				
+{% block form_row %}
+{% spaceless %}
+    <div>
+		{% if no_label is defined and no_label == true %}
+      asd  {{ form_label(form) }}asd
+		{% endif %}
+        {{ form_errors(form) }}
+        {{ form_widget(form) }}
+    </div>
+{% endspaceless %}
+{% endblock form_row %}		

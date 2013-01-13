@@ -1,0 +1,293 @@
+<?php
+
+namespace VS\UserBundle\Entity;
+
+use FOS\UserBundle\Entity\User as BaseUser;
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="users")
+ * @ORM\HasLifecycleCallbacks
+ */
+class User extends BaseUser {
+
+	/**
+	 * @ORM\Id
+	 * @ORM\Column(type="integer")
+	 * @ORM\GeneratedValue(strategy="AUTO")
+	 */
+	protected $id;
+
+	/**
+	 * @var date $birthday
+	 *
+	 * @ORM\Column(name="birthday", type="date")
+	 * @Assert\Date()
+	 */
+	protected $birthday;
+
+	/**
+	 * @var string $signature
+	 *
+	 * @ORM\Column(name="signature",type="string", length=255,nullable=true)
+	 */
+	protected $signature;
+
+	/**
+	 * @var string $gender
+	 *
+	 * @ORM\Column(name="gender",type="string",length=255)
+	 * @Assert\Choice({"m", "f"})
+	 */
+	protected $gender;
+
+	/**
+	 * @var string $avatar
+	 *
+	 * @ORM\Column(name="avatar",type="string",length=255, nullable=true)
+	 */
+	protected $avatar;
+
+	/**
+	 * @var datetime $register_date
+	 *
+	 * @ORM\Column(name="register_date",type="datetime", nullable=false)
+	 */
+	protected $register_date;
+
+	/**
+	 * @var datetime $updated_at
+	 *
+	 * @ORM\Column(name="updated_at",type="datetime", nullable=true)
+	 */
+	protected $updated_at;
+	
+	/**
+	 *
+	 * @var type 
+	 * @Assert\File(maxSize="6000000")
+	 */
+	protected $avatar_file;
+	
+	protected $uploadDir = 'uploads/users';
+	
+	protected $files = array("avatar_file");
+	
+	public function __construct() {
+		$this->register_date = new \Datetime();
+		parent::__construct();
+	}
+
+	/**
+	 * Get id
+	 *
+	 * @return integer 
+	 */
+	public function getId() {
+		return $this->id;
+	}
+
+	/**
+	 * Set birthday
+	 *
+	 * @param \DateTime $birthday
+	 * @return User
+	 */
+	public function setBirthday($birthday) {
+		$this->birthday = $birthday;
+
+		return $this;
+	}
+
+	/**
+	 * Get birthday
+	 *
+	 * @return \DateTime 
+	 */
+	public function getBirthday() {
+		return $this->birthday;
+	}
+
+	/**
+	 * Set signature
+	 *
+	 * @param string $signature
+	 * @return User
+	 */
+	public function setSignature($signature) {
+		$this->signature = $signature;
+
+		return $this;
+	}
+
+	/**
+	 * Get signature
+	 *
+	 * @return string 
+	 */
+	public function getSignature() {
+		return $this->signature;
+	}
+
+	/**
+	 * Set gender
+	 *
+	 * @param string $gender
+	 * @return User
+	 */
+	public function setGender($gender) {
+		$this->gender = $gender;
+
+		return $this;
+	}
+
+	/**
+	 * Get gender
+	 *
+	 * @return string 
+	 */
+	public function getGender() {
+		return $this->gender;
+	}
+
+	/**
+	 * Set register_date
+	 *
+	 * @param \DateTime $registerDate
+	 * @return User
+	 */
+	public function setRegisterDate($registerDate) {
+		$this->register_date = $registerDate;
+
+		return $this;
+	}
+
+	/**
+	 * Get register_date
+	 *
+	 * @return \DateTime 
+	 */
+	public function getRegisterDate() {
+		return $this->register_date;
+	}
+
+	/**
+	 * Set avatar
+	 *
+	 * @param string $avatar
+	 * @return User
+	 */
+	public function setAvatar($avatar) {
+		$this->avatar = $avatar;
+
+		return $this;
+	}
+
+	/**
+	 * Get avatar
+	 *
+	 * @return string 
+	 */
+	public function getAvatar() {
+		return $this->avatar;
+	}
+
+	public function getUpdatedAt() {
+		return $this->updated_at;
+	}
+
+	public function setUpdatedAt($updated_at) {
+		$this->updated_at = $updated_at;
+	}
+
+	public function getAvatarFile() {
+		return $this->avatar_file;
+	}
+
+	public function setAvatarFile($avatar_file) {
+		$this->avatar_file = $avatar_file;
+	}
+
+	public function getFiles() {
+		return $this->files;
+	}
+
+	public function setFiles($files) {
+		$this->files = $files;
+	}
+
+	public function getAbolutePath() {
+		return $this->path === null ? null : $this->getUploadRootDir() . '/' . $this->path;
+	}
+
+	public function getWebPath() {
+		return $this->path === null ? null : $this->getUploadDir() . '/' . $this->path;
+	}
+
+	protected function getUploadRootDir() {
+		return __DIR__ . '/../../../../web/' . $this->getUploadDir();
+	}
+
+	protected function getUploadDir() {
+		return $this->uploadDir;
+	}
+
+	/**
+	 * @ORM\PrePersist()
+	 * @ORM\PreUpdate()
+	 */
+	public function execUpdatedAt() {
+		$this->setUpdatedAt(new \Datetime());
+	}
+
+	/**
+	 * @ORM\PrePersist()
+	 * @ORM\PreUpdate()
+	 */
+	public function preUpload() {
+		foreach ($this->files as $file) {
+			if (null !== $this->$file) {
+				// do whatever you want to generate a unique name
+				$filename = sha1(uniqid(mt_rand(), true)); 
+				$filename_property = substr($file, 0, strrpos($file, "_"));
+				$this->$filename_property = $filename . '.' . $this->$file->guessExtension();
+			}
+		}
+	}
+
+	/**
+	 * @ORM\PostPersist()
+	 * @ORM\PostUpdate()
+	 */
+	public function upload() 
+	{
+		foreach($this->files as $file){
+			if (null === $this->$file) {
+				return;
+			}
+			$filename = sha1(uniqid(mt_rand(), true));
+			$filename_property = substr($file, 0, strrpos($file, "_"));
+			// if there is an error when moving the file, an exception will
+			// be automatically thrown by move(). This will properly prevent
+			// the entity from being persisted to the database on error
+			$this->$file->move($this->getUploadRootDir(), $this->$filename_property);
+			unset($this->$file);
+		}
+	
+	}
+
+	/**
+	 * @ORM\PostRemove()
+	 */
+	public function removeUpload() {
+		foreach($this->files as $file){
+			$filename_property = substr($file, 0, strrpos($file, "_"));
+			if ($file = $this->getUploadRootDir() .'/'. $this->$filename_property) {
+				unlink($file);
+			}
+		}
+	}
+
+}

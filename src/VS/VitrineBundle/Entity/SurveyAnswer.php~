@@ -1,0 +1,199 @@
+<?php
+
+namespace VS\VitrineBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * SurveyAnswer
+ */
+class SurveyAnswer
+{
+    /**
+     * @var integer
+     */
+    private $id;
+
+    /**
+     * @var string
+     */
+    private $content;
+
+    /**
+     * @var integer
+     */
+    private $total_votes;
+
+    /**
+     * @var \DateTime
+     */
+    private $created_at;
+
+    /**
+     * @var \DateTime
+     */
+    private $updated_at;
+
+  /**
+     * @var \VS\VitrineBundle\Entity\Survey
+     */
+    private $survey;
+
+	public function __construct(){
+		$this->total_votes = 0;
+	}
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set content
+     *
+     * @param string $content
+     * @return SurveyAnswer
+     */
+    public function setContent($content)
+    {
+        $this->content = $content;
+    
+        return $this;
+    }
+
+    /**
+     * Get content
+     *
+     * @return string 
+     */
+    public function getContent()
+    {
+        return $this->content;
+    }
+
+    /**
+     * Set total_votes
+     *
+     * @param integer $totalVotes
+     * @return SurveyAnswer
+     */
+    public function setTotalVotes($totalVotes)
+    {
+        $this->total_votes = $totalVotes;
+    
+        return $this;
+    }
+
+    /**
+     * Get total_votes
+     *
+     * @return integer 
+     */
+    public function getTotalVotes()
+    {
+        return $this->total_votes;
+    }
+
+
+    /**
+     * Set created_at
+     *
+     * @param \DateTime $createdAt
+     * @return SurveyAnswer
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->created_at = $createdAt;
+    
+        return $this;
+    }
+
+    /**
+     * Get created_at
+     *
+     * @return \DateTime 
+     */
+    public function getCreatedAt()
+    {
+        return $this->created_at;
+    }
+
+    /**
+     * Set updated_at
+     *
+     * @param \DateTime $updatedAt
+     * @return SurveyAnswer
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updated_at = $updatedAt;
+    
+        return $this;
+    }
+
+    /**
+     * Get updated_at
+     *
+     * @return \DateTime 
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updated_at;
+    }
+
+  
+    /**
+     * Set survey
+     *
+     * @param \VS\VitrineBundle\Entity\Survey $survey
+     * @return SurveyAnswer
+     */
+    public function setSurvey(\VS\VitrineBundle\Entity\Survey $survey = null)
+    {
+        $this->survey = $survey;
+    
+        return $this;
+    }
+
+    /**
+     * Get survey
+     *
+     * @return \VS\VitrineBundle\Entity\Survey 
+     */
+    public function getSurvey()
+    {
+        return $this->survey;
+    }
+    /**
+     * @var \VS\UserBundle\Entity\User
+     */
+    private $author;
+
+
+    /**
+     * Set author
+     *
+     * @param \VS\UserBundle\Entity\User $author
+     * @return SurveyAnswer
+     */
+    public function setAuthor(\VS\UserBundle\Entity\User $author = null)
+    {
+        $this->author = $author;
+    
+        return $this;
+    }
+
+    /**
+     * Get author
+     *
+     * @return \VS\UserBundle\Entity\User 
+     */
+    public function getAuthor()
+    {
+        return $this->author;
+    }
+}
