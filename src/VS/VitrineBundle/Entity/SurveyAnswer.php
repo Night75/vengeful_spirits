@@ -7,8 +7,8 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * SurveyAnswer
  */
-class SurveyAnswer
-{
+class SurveyAnswer {
+
     /**
      * @var integer
      */
@@ -34,29 +34,28 @@ class SurveyAnswer
      */
     private $updated_at;
 
-	/**
+    /**
      * @var \VS\VitrineBundle\Entity\Survey
      */
     private $survey;
 
-	public function __construct($content = null, $total_votes = 0){
-		$this->content = $content;
-		$this->total_votes = $total_votes;
-		$this->created_at = new \Datetime();
-		$this->updated_at = new \Datetime();
-	}
-	
-	public function __toString(){
-		return $this->content;
-	}
-	
+    public function __construct($content = null, $total_votes = 0) {
+        $this->content = $content;
+        $this->total_votes = $total_votes;
+        $this->created_at = new \Datetime();
+        $this->updated_at = new \Datetime();
+    }
+
+    public function __toString() {
+        return $this->content;
+    }
+
     /**
      * Get id
      *
      * @return integer 
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -66,10 +65,9 @@ class SurveyAnswer
      * @param string $content
      * @return SurveyAnswer
      */
-    public function setContent($content)
-    {
+    public function setContent($content) {
         $this->content = $content;
-    
+
         return $this;
     }
 
@@ -78,8 +76,7 @@ class SurveyAnswer
      *
      * @return string 
      */
-    public function getContent()
-    {
+    public function getContent() {
         return $this->content;
     }
 
@@ -89,10 +86,9 @@ class SurveyAnswer
      * @param integer $totalVotes
      * @return SurveyAnswer
      */
-    public function setTotalVotes($totalVotes)
-    {
+    public function setTotalVotes($totalVotes) {
         $this->total_votes = $totalVotes;
-    
+
         return $this;
     }
 
@@ -101,11 +97,9 @@ class SurveyAnswer
      *
      * @return integer 
      */
-    public function getTotalVotes()
-    {
+    public function getTotalVotes() {
         return $this->total_votes;
     }
-
 
     /**
      * Set created_at
@@ -113,10 +107,9 @@ class SurveyAnswer
      * @param \DateTime $createdAt
      * @return SurveyAnswer
      */
-    public function setCreatedAt($createdAt)
-    {
+    public function setCreatedAt($createdAt) {
         $this->created_at = $createdAt;
-    
+
         return $this;
     }
 
@@ -125,8 +118,7 @@ class SurveyAnswer
      *
      * @return \DateTime 
      */
-    public function getCreatedAt()
-    {
+    public function getCreatedAt() {
         return $this->created_at;
     }
 
@@ -136,10 +128,9 @@ class SurveyAnswer
      * @param \DateTime $updatedAt
      * @return SurveyAnswer
      */
-    public function setUpdatedAt($updatedAt)
-    {
+    public function setUpdatedAt($updatedAt) {
         $this->updated_at = $updatedAt;
-    
+
         return $this;
     }
 
@@ -148,22 +139,19 @@ class SurveyAnswer
      *
      * @return \DateTime 
      */
-    public function getUpdatedAt()
-    {
+    public function getUpdatedAt() {
         return $this->updated_at;
     }
 
-  
     /**
      * Set survey
      *
      * @param \VS\VitrineBundle\Entity\Survey $survey
      * @return SurveyAnswer
      */
-    public function setSurvey(\VS\VitrineBundle\Entity\Survey $survey = null)
-    {
+    public function setSurvey(\VS\VitrineBundle\Entity\Survey $survey = null) {
         $this->survey = $survey;
-    
+
         return $this;
     }
 
@@ -172,10 +160,8 @@ class SurveyAnswer
      *
      * @return \VS\VitrineBundle\Entity\Survey 
      */
-    public function getSurvey()
-    {
+    public function getSurvey() {
         return $this->survey;
     }
 
-	
 }

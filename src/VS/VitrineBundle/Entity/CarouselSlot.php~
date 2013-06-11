@@ -38,6 +38,12 @@ class CarouselSlot
      * @var boolean
      */
     private $activated;
+		
+    /**
+     * @var \VS\UserBundle\Entity\User
+     */
+    private $author;
+
 
     /**
      * @var \DateTime
@@ -223,11 +229,6 @@ class CarouselSlot
     {
         return $this->updated_at;
     }
-    /**
-     * @var \VS\UserBundle\Entity\User
-     */
-    private $author;
-
 
     /**
      * Set author

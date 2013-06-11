@@ -1,0 +1,7 @@
+parameters:
+#    wms_vitrine.example.class: Wms\VitrineBundle\Example
+
+services:
+#    wms_vitrine.example:
+#        class: %wms_vitrine.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

@@ -3,28 +3,41 @@
 namespace VS\VitrineBundle\Entity;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use Night\CommonBundle\Doctrine\BaseManager;
+use Night\CommonBundle\Doctrine\FileManager;
 
-class DocFileManager extends BaseManager 
-{
+class DocFileManager extends FileManager {
+
 	protected $objectManager;
 	protected $class;
 	protected $repository;
+
+	protected $parentEntities = array("storage");
+	/*
+	 * Entity est en fait obligatoire, l'egalite à null est necessaire pour est compatible au BasManager
+	 */
+	public function getUploadDir($entity = null) {
 	
-	public function upload($entity) {	
-		parent::upload($entity);
-		
-		// ==== Si il n'y a aucun fichier dans l'entite alors on la supprime
-		foreach ($this->files as $fileProperty) {
-			$fileGetter =  $this->classUtil->propertyNameToGetter($fileProperty); 
-			$file = $entity->$fileGetter();
-			if(!empty($file)){
-				break;
+		//foreach($parentEntities as $parentEntity){
+			
+			if($parent = $entity->getStorage()){
+				if(!$parentId = $parent->getId()){
+					$parentManager = $this->entityUtil->getManagerFromEntity($parent);
+					$parentId = $this->container->get($parentManager)->getLatestId() + 1;
+				}
+				$uploadDir = "/uploads/storage/" .$parentId;
 			}
+			elseif($parent = $entity->getStorageUnique()){
+				if(!$parentId = $parent->getId()){
+					$parentManager = $this->entityUtil->getManagerFromEntity($parent);
+					$parentId = $this->container->get($parentManager)->getLatestId() + 1;
+				}
+				$uploadDir = "/uploads/storageunique/" .$parentId;
+			}
+	
+		if(empty($uploadDir)){
+			throw new InvalidArgumentException("L'entite %s n'a pas de classe parente correspondante.". get_class($entity));
 		}
-		echo "Pre delete";
-		$this->delete($entity);
-		echo "post delete";
+		return $uploadDir;
 	}
 	
 }

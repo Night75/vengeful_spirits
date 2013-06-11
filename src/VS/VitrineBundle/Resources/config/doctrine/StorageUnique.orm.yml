@@ -1,0 +1,17 @@
+VS\VitrineBundle\Entity\StorageUnique:
+  type: entity
+  repositoryClass: VS\VitrineBundle\Repository\StorageUniqueRepository
+  table: storage_unique
+  id: 
+    id:
+      type: integer
+      generator: { strategy: AUTO }
+  fields:
+    title:
+      type: string
+      length: 255
+  oneToOne:
+    link:
+      targetEntity: Link
+      mappedBy: storage_unique
+      cascade: ["all"]

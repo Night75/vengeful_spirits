@@ -1,8 +1,8 @@
-{% set path_public = asset("bundles/vsvitrine/") %}
-{% set path_img =  asset("bundles/vsvitrine/images/") %}
-{% set path_img_articles =  asset("uploads/articles/") %}
-{% set path_img_carousel =  asset("uploads/carousel/") %}
-{% set path_img_user =  asset("uploads/users/") %}
+{% set path_public = "/web/bundles/vsvitrine/" %}
+{% set path_img = "/web/bundles/vsvitrine/images/" %}
+{% set path_img_articles =  "/web/uploads/articles/" %}
+{% set path_img_carousel =  "/web/uploads/carousel/" %}
+{% set path_img_user =  "/web/uploads/users/" %}
 
 <!DOCTYPE html>
 <html>
@@ -10,14 +10,13 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<title>{% block title %}Vengeful Spirits{% endblock %}</title>
 	
-	{% stylesheets '@VSVitrineBundle/Resources/public/css/vengeful_spirits.css' %}
+	{% stylesheets '@VSVitrineBundle/Resources/public/css/vengeful_spirits.css' output='/web/css/vengeful/main.css' %}
 		 <link rel="stylesheet" href="{{ asset_url }}" />
 	{% endstylesheets %}
 	{% block style %}
-	{% endblock %}
-		 
+	{% endblock %} 
 		<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
-	{% javascripts '@VSVitrineBundle/Resources/public/js/*' %}
+	{% javascripts '@VSVitrineBundle/Resources/public/js/*' output='/web/js/vengeful/main.js' %}
 		<script type="text/javascript" src="{{ asset_url }}"></script>
 	{% endjavascripts %}
 	
@@ -73,7 +72,7 @@
 				--><li class="bt-menu-light">	
 						<a class="unavailable" href="">Forum</a>
 					</li>
-						{% if is_granted('ROLE_ADMIN') %}
+						{% if app.user is not null and is_granted('ROLE_ADMIN') %}
 						<li class="bt-gold">
 							<a href="{{path('sonata_admin_dashboard')}}">Espace admin</a>
 						</li>

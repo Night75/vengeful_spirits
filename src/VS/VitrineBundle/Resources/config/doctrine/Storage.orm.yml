@@ -14,4 +14,10 @@ VS\VitrineBundle\Entity\Storage:
     doc_files:
       targetEntity: DocFile
       mappedBy: storage
-      cascade: ["persist", "remove"]
+      cascade: ["all"]
+  manyToOne:
+    storageType:
+      targetEntity: StorageType
+      joinColumn: 
+        name: storage_type_id
+        referencedColumnName: id

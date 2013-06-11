@@ -1,6 +1,10 @@
+wms_vitrine:
+    resource: "@WmsVitrineBundle/Resources/config/routing.yml"
+    prefix:   /
+
 vs_vitrine:
     resource: "@VSVitrineBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:   /vs
 
 vs_user:
     resource: "@VSUserBundle/Resources/config/routing.yml"
@@ -37,3 +41,7 @@ _sonata_admin:
     resource: .
     type: sonata_admin
     prefix: /admin
+    
+_imagine:
+    resource: .
+    type:     imagine    

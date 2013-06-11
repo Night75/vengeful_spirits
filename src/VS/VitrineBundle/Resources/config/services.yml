@@ -35,10 +35,18 @@ services:
       class: VS\VitrineBundle\Entity\StorageManager      
       arguments: [@doctrine.orm.default_entity_manager, @service_container ]
 
+    vs.vitrine.storage_unique_manager:
+      class: VS\VitrineBundle\Entity\StorageUniqueManager      
+      arguments: [@doctrine.orm.default_entity_manager, @service_container ]
+      
     vs.vitrine.doc_file_manager:
       class: VS\VitrineBundle\Entity\DocFileManager      
       arguments: [@doctrine.orm.default_entity_manager, @service_container ]
-     
+      
+    vs.vitrine.storage_type_manager:
+      class: VS\VitrineBundle\Entity\StorageTypeManager   
+      arguments: [@doctrine.orm.default_entity_manager, @service_container ]
+      
    ### -------------------- ADMIN -------------------- ###
 
     vs.vitrine.admin.article:
@@ -57,6 +65,22 @@ services:
         - { name: sonata.admin, manager_type: orm, group: vs, label: Storages }
       arguments: [ null, VS\VitrineBundle\Entity\Storage, null ]
 
+    vs.vitrine.admin.storage_unique:
+      class: VS\VitrineBundle\Admin\StorageUniqueAdmin
+      calls: 
+        - [ setContainer, [@service_container] ]
+      tags: 
+        - { name: sonata.admin, manager_type: orm, group: vs, label: StorageUnique }
+      arguments: [ null, VS\VitrineBundle\Entity\StorageUnique, null ]
+      
+    vs.vitrine.admin.storage_type:
+      class: VS\VitrineBundle\Admin\StorageTypeAdmin
+      calls: 
+        - [ setContainer, [@service_container] ]
+      tags: 
+        - { name: sonata.admin, manager_type: orm, group: vs, label: StorageType }
+      arguments: [ null, VS\VitrineBundle\Entity\StorageType, null ]
+      
     vs.vitrine.admin.doc_file:
       class: VS\VitrineBundle\Admin\DocFileAdmin
       tags: 

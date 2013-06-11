@@ -42,12 +42,12 @@ class SurveyController extends Controller
 	}
 	
 	public function voteAction()
-	{
+	{	
 		$manager = $this->get("vs.vitrine.survey_manager");
 		
 		$survey = $manager->getLastSurvey();
-		$form = $this->createForm($this->get("vs.vitrine.survey_vote_type"));
-		
+		$form = $this->createForm($this->get("vs.vitrine.survey_vote_type"));	
+	
 		if ($this->getRequest()->getMethod() == 'POST' && $this->getRequest()->get($form->getName())) {
 			
 			$form->bind($this->get("request"));
@@ -55,7 +55,7 @@ class SurveyController extends Controller
 				$survey = $form->getData();
 				$manager->vote($survey->getSurveyVote());
 				$this->getRequest()->getSession()->set("has_voted", true);
-				return $this->resultAction($survey);
+				return $this->resultAction();
 			}
 		}
 		
@@ -74,7 +74,7 @@ class SurveyController extends Controller
 			$manager = $this->get("vs.vitrine.survey_manager");		
 			$survey = $manager->getLastSurvey();
 		}
-		
+
 		return $this->render("VSVitrineBundle:Survey:_widget_results.html.twig",array(
 				"survey" => $survey
 			),

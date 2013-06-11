@@ -29,7 +29,9 @@ twig:
 assetic:
     debug:          "%kernel.debug%"
     use_controller: false
-    bundles:        [ ]
+    read_from:      %kernel.root_dir%/../web
+    write_to:       %kernel.root_dir%/..
+    # bundles:        [ ]
     #java: /usr/bin/java
     filters:
         cssrewrite: ~
@@ -58,7 +60,7 @@ sonata_block:
     blocks:
         sonata.admin.block.admin_list:
             contexts:   [admin]
-  
+
 sonata_admin:
     templates:
         layout:  ::base_admin.html.twig        
@@ -75,8 +77,10 @@ sonata_admin:
                     - vs.vitrine.admin.survey      
             Temp:
                 items:
-                    - vs.vitrine.admin.storage                    
+                    - vs.vitrine.admin.storage  
+                    - vs.vitrine.admin.storage_unique  
                     - vs.vitrine.admin.doc_file                    
+                    - vs.vitrine.admin.storage_type
             Utilisateurs:
                 items:
                     - vs.vitrine.admin.user
@@ -126,3 +130,17 @@ fos_user:
     change_password:
         form:
             type: vs_user_change_password    
+            
+            
+avalanche_imagine:
+    source_root:  %kernel.root_dir%/..
+    web_root:     %kernel.root_dir%/..
+    cache_prefix: cache_media
+    driver:       gd
+    filters:     
+        heighten:
+            type:    relative_resize
+            options: { heighten: 100 }  
+        my_thumb:
+            type:    thumbnail
+            options: { size: [120, 90], mode: outbound }

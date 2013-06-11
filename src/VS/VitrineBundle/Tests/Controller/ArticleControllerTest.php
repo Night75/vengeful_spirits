@@ -1,55 +1,31 @@
 <?php
 
-namespace VS\VitrineBundle\Tests\Controller;
+namespace VS\VitrineBundle\Tests\Views;
 
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-
-class ArticleControllerTest extends WebTestCase
+/**
+ * Tests for PHPUnit_Extensions_Selenium2TestCase.
+ *
+ * @package    PHPUnit_Selenium
+ * @author     Giorgio Sironi <info@giorgiosironi.com>
+ * @copyright  2010-2013 Sebastian Bergmann <sebastian@phpunit.de>
+ * @license    http://www.opensource.org/licenses/BSD-3-Clause  The BSD 3-Clause License
+ * @link       http://www.phpunit.de/
+ */
+class ArticleControllerTest extends \PHPUnit_Extensions_Selenium2TestCase
 {
     /*
-    public function testCompleteScenario()
+    protected function setUp()
     {
-        // Create a new client to browse the application
-        $client = static::createClient();
-
-        // Create a new entry in the database
-        $crawler = $client->request('GET', '/article/');
-        $this->assertTrue(200 === $client->getResponse()->getStatusCode());
-        $crawler = $client->click($crawler->selectLink('Create a new entry')->link());
-
-        // Fill in the form and submit it
-        $form = $crawler->selectButton('Create')->form(array(
-            'vs_vitrinebundle_articletype[field_name]'  => 'Test',
-            // ... other fields to fill
-        ));
-
-        $client->submit($form);
-        $crawler = $client->followRedirect();
-
-        // Check data in the show view
-        $this->assertTrue($crawler->filter('td:contains("Test")')->count() > 0);
-
-        // Edit the entity
-        $crawler = $client->click($crawler->selectLink('Edit')->link());
-
-        $form = $crawler->selectButton('Edit')->form(array(
-            'vs_vitrinebundle_articletype[field_name]'  => 'Foo',
-            // ... other fields to fill
-        ));
-
-        $client->submit($form);
-        $crawler = $client->followRedirect();
-
-        // Check the element contains an attribute with value equals "Foo"
-        $this->assertTrue($crawler->filter('[value="Foo"]')->count() > 0);
-
-        // Delete the entity
-        $client->submit($crawler->selectButton('Delete')->form());
-        $crawler = $client->followRedirect();
-
-        // Check the entity has been delete on the list
-        $this->assertNotRegExp('/Foo/', $client->getResponse()->getContent());
+        $this->setHost('localhost');
+        $this->setPort(5555);
+        $this->setBrowser('firefox');
+        $this->setBrowserUrl('http://vengeful.org/');
     }
 
+    public function testHasArticles(){
+        $this->url('vs');
+        $element = $this->byCssSelector('body');
+        $this->assertEquals('Click here for next page', $element->text());
+    }
     */
 }

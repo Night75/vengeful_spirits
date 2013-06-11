@@ -12,7 +12,7 @@ class SurveyAnswerType extends AbstractType
     {
         $builder
             ->add('content', "text", array("no_sublabel" => true))
-		 ->add("updated_at", 'datetime', array('required' => 'false', "no_label" => true,  "attr" => array("class" => "hidden",) ))
+            ->add("updated_at", 'datetime', array('required' => 'false', "no_label" => true,  "attr" => array("class" => "hidden",) ))
         ;
     }
 

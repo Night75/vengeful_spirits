@@ -11,10 +11,27 @@ VS\VitrineBundle\Entity\DocFile:
     file:
       type: string
       length: 255
+    path:
+      type: string
+      length: 255
+    size: 
+      type: decimal
+    mime_type:
+      type: string
+      length: 255  
+    updated_at:
+      type: datetime  
   manyToOne:
     storage:
       targetEntity: Storage
       inversedBy: doc_files
       joinColumn:
         name: storage_id
+        referencedColumnName: id
+  oneToOne:
+    storage_unique:
+      targetEntity: Link
+      inversedBy: doc_file
+      joinColumn:
+        name: link_id
         referencedColumnName: id

@@ -14,7 +14,6 @@ class ArticleType extends AbstractType
             ->add('title')
             ->add('content')
             ->add('created_at')
-
         ;
     }
 

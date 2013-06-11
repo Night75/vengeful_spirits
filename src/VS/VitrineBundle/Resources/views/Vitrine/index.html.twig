@@ -186,7 +186,7 @@
 					
 					<div class="gn-panel-container">
 						<div class="article-img">
-							<a href="{{path('article_show',{'id':article.id}) }}" {><img src="{{path_img_articles}}{{article.image | default("default.jpg")}}"/></a>
+							<a href="{{path('article_show',{'id':article.id}) }}" {><img src="{{ (path_img_articles ~ article.image) | apply_filter('my_thumb') }}"/></a>
 						</div>
 						<div class="article-txt">
 							<div class="article-txt-wrapper">

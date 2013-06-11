@@ -23,12 +23,12 @@ class Event
      * @var string
      */
     private $description;
-		
+	
     /**
      * @var \VS\UserBundle\Entity\User
      */
     private $author;
-
+		
     /**
      * @var \DateTime
      */

@@ -7,30 +7,3 @@ article:
 article_show:
     pattern:  /{id}/show
     defaults: { _controller: "VSVitrineBundle:Article:show" }
-
-article_test:
-    pattern: /test/{id}
-    defaults: { _controller: "VSVitrineBundle:Article:test" }
-
-article_new:
-    pattern:  /new
-    defaults: { _controller: "VSVitrineBundle:Article:new" }
-
-article_create:
-    pattern:  /create
-    defaults: { _controller: "VSVitrineBundle:Article:create" }
-    requirements: { _method: post }
-
-article_edit:
-    pattern:  /{id}/edit
-    defaults: { _controller: "VSVitrineBundle:Article:edit" }
-
-article_update:
-    pattern:  /{id}/update
-    defaults: { _controller: "VSVitrineBundle:Article:update" }
-    requirements: { _method: post }
-
-article_delete:
-    pattern:  /{id}/delete
-    defaults: { _controller: "VSVitrineBundle:Article:delete" }
-    requirements: { _method: post }

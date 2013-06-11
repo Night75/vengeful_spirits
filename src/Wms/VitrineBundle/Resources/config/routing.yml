@@ -1,0 +1,3 @@
+wmsvitrine_index:
+    pattern:  /
+    defaults: { _controller: WmsVitrineBundle:Vitrine:index }

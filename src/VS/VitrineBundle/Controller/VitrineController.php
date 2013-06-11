@@ -19,7 +19,7 @@ class VitrineController extends Controller
 	 */
 	public function render($view, array $parameters = array(), Response $response = null, $resetParent = false) {
 		if(!$resetParent){
-			$parameters['formLogin'] = $this->forward("VSUserBundle:Security:login", array("request" => $this->getRequest(), "isWidget"=> true))->getContent();
+			$parameters['formLogin'] = $this->forward("VSUserBundle:Security:myLogin", array("isWidget"=> true))->getContent();
 		}
 		return parent::render($view, $parameters);
 	}
@@ -35,8 +35,7 @@ class VitrineController extends Controller
 		$eventsGroups = $eventManager->getCurrentEventsOrdered();
 
 		$surveyTemplate = $this->forward("VSVitrineBundle:Survey:widget");
-
-		//var_dump($surveyTemplate); exit;
+		// var_dump($surveyTemplate); exit;
 		return $this->render('VSVitrineBundle:Vitrine:index.html.twig', array(
 			"carouselSlots" => $carouselSlots,
 			"articles" => $articles,

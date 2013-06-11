@@ -33,7 +33,7 @@ class ArticleController extends Controller
 		$em = $this->getDoctrine()->getManager();
 		$query = $em->getRepository('VSVitrineBundle:Article')->getArticlesQuery();
 		$paginator = $this->get('knp_paginator');
-		$pagination = $paginator->paginate($query, $page, $this->container->getParameter('vs.vitrine.max_articles_on_index'));
+		$pagination = $paginator->paginate($query, $page, $this->container->getParameter('max_articles_on_index'));
 
 		return $this->render('VSVitrineBundle:Article:index.html.twig', array(
 			'pagination' => $pagination,

@@ -1,0 +1,12 @@
+VS\VitrineBundle\Entity\StorageType:
+  type: entity
+  repositoryClass: VS\VitrineBundle\Repository\StorageTypeRepository
+  table: storagetype
+  id: 
+    id:
+      type: integer
+      generator: { strategy: AUTO }
+  fields:
+    type:
+      type: string
+      length: 255

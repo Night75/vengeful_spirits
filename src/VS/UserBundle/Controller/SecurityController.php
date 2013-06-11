@@ -8,10 +8,17 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\SecurityContext;
 use FOS\UserBundle\Controller\SecurityController as Controller;
 
+
 class SecurityController extends Controller
 {
-	public function loginAction(Request $request, $isWidget = false) {
+	public function loginAction()
+	{
+		$this->myloginAction(false);
+	}
+	
+	public function myloginAction($isWidget) {
 		/** @var $session \Symfony\Component\HttpFoundation\Session\Session */
+        $request = $this->container->get('request');
 		$session = $request->getSession();
 
 		// get the error if any (works with forward and redirect -- see below)

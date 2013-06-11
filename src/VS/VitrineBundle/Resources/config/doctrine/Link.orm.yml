@@ -1,0 +1,27 @@
+VS\VitrineBundle\Entity\Link:
+  type: entity
+  repositoryClass: VS\VitrineBundle\Repository\LinkRepository
+  table: links
+  id:
+    id:
+      type: integer
+      generator: { strategy: AUTO }
+  fields:
+    type:
+      type: string
+      length: 255
+    textButton:
+      type: string
+      length: 255
+    url:
+      type: string
+      length: 255
+    created_at:
+      type: datetime
+    updated_at:
+      type: datetime
+  oneToOne:
+    doc_file:
+      targetEntity: DocFile
+      mappedBy: link
+      cascade: ["all"]

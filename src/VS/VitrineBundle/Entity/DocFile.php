@@ -2,84 +2,222 @@
 
 namespace VS\VitrineBundle\Entity;
 
-use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * DocFile
  */
-class DocFile {
+class DocFile
+{
+    /**
+     * @var integer
+     */
+    private $id;
 
-	/**
-	 * @var integer
-	 */
-	private $id;
+    /**
+     * @var string
+     */
+    private $file;
 
-	/**
-	 * @var \VS\VitrineBundle\Entity\Storage
-	 */
-	private $storage;
+    /**
+     * @var string
+     */
+    private $path;
 
-	/**
-	 * @Assert\File(maxSize = "1024k")
-	 */
-	private $file_add;
-	private $file_delete;
-	private $file;
+    /**
+     * @var float
+     */
+    private $size;
 
-	/**
-	 * Get id
-	 *
-	 * @return integer 
-	 */
-	public function getId() {
-		return $this->id;
-	}
+    /**
+     * @var string
+     */
+    private $mime_type;
 
-	/**
-	 * Set storage
-	 *
-	 * @param \VS\VitrineBundle\Entity\Storage $storage
-	 * @return DocFile
-	 */
-	public function setStorage(\VS\VitrineBundle\Entity\Storage $storage = null) {
-		$this->storage = $storage;
+    /**
+     * @var \DateTime
+     */
+    private $updated_at;
 
-		return $this;
-	}
+    /**
+     * @var \VS\VitrineBundle\Entity\Link
+     */
+    private $storage_unique;
 
-	/**
-	 * Get storage
-	 *
-	 * @return \VS\VitrineBundle\Entity\Storage 
-	 */
-	public function getStorage() {
-		return $this->storage;
-	}
-
-	public function getFileAdd() {
-		return $this->file_add;
-	}
-
-	public function setFileAdd($file_add) {
-		$this->file_add = $file_add;
-	}
-
-	public function getFile() {
-		return $this->file;
-	}
-
-	public function setFile($file) {
-		$this->file = $file;
-	}
-
-	public function getFileDelete() {
-		return $this->file_delete;
-	}
-
-	public function setFileDelete($file_delete) {
-		$this->file_delete = $file_delete;
-	}
+    /**
+     * @var \VS\VitrineBundle\Entity\Storage
+     */
+    private $storage;
 
 
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
 
+    /**
+     * Set file
+     *
+     * @param string $file
+     * @return DocFile
+     */
+    public function setFile($file)
+    {
+        $this->file = $file;
+    
+        return $this;
+    }
+
+    /**
+     * Get file
+     *
+     * @return string 
+     */
+    public function getFile()
+    {
+        return $this->file;
+    }
+
+    /**
+     * Set path
+     *
+     * @param string $path
+     * @return DocFile
+     */
+    public function setPath($path)
+    {
+        $this->path = $path;
+    
+        return $this;
+    }
+
+    /**
+     * Get path
+     *
+     * @return string 
+     */
+    public function getPath()
+    {
+        return $this->path;
+    }
+
+    /**
+     * Set size
+     *
+     * @param float $size
+     * @return DocFile
+     */
+    public function setSize($size)
+    {
+        $this->size = $size;
+    
+        return $this;
+    }
+
+    /**
+     * Get size
+     *
+     * @return float 
+     */
+    public function getSize()
+    {
+        return $this->size;
+    }
+
+    /**
+     * Set mime_type
+     *
+     * @param string $mimeType
+     * @return DocFile
+     */
+    public function setMimeType($mimeType)
+    {
+        $this->mime_type = $mimeType;
+    
+        return $this;
+    }
+
+    /**
+     * Get mime_type
+     *
+     * @return string 
+     */
+    public function getMimeType()
+    {
+        return $this->mime_type;
+    }
+
+    /**
+     * Set updated_at
+     *
+     * @param \DateTime $updatedAt
+     * @return DocFile
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updated_at = $updatedAt;
+    
+        return $this;
+    }
+
+    /**
+     * Get updated_at
+     *
+     * @return \DateTime 
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updated_at;
+    }
+
+    /**
+     * Set storage_unique
+     *
+     * @param \VS\VitrineBundle\Entity\Link $storageUnique
+     * @return DocFile
+     */
+    public function setStorageUnique(\VS\VitrineBundle\Entity\Link $storageUnique = null)
+    {
+        $this->storage_unique = $storageUnique;
+    
+        return $this;
+    }
+
+    /**
+     * Get storage_unique
+     *
+     * @return \VS\VitrineBundle\Entity\Link 
+     */
+    public function getStorageUnique()
+    {
+        return $this->storage_unique;
+    }
+
+    /**
+     * Set storage
+     *
+     * @param \VS\VitrineBundle\Entity\Storage $storage
+     * @return DocFile
+     */
+    public function setStorage(\VS\VitrineBundle\Entity\Storage $storage = null)
+    {
+        $this->storage = $storage;
+    
+        return $this;
+    }
+
+    /**
+     * Get storage
+     *
+     * @return \VS\VitrineBundle\Entity\Storage 
+     */
+    public function getStorage()
+    {
+        return $this->storage;
+    }
 }
